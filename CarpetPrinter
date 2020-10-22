@@ -1,0 +1,98 @@
+#include <iostream>
+
+using namespace std;
+    int temp;
+    int box_width;
+    int box_length;
+    int carpet_width;
+    int carpet_length;
+    char star = '*';
+    char fence = 'X';
+
+    void get_imputs()
+{
+   cout<<"Podaj ilosc kolumn w kafelku"<<endl;
+   cin >>box_width;
+   while(box_width%2==0){
+   cout<<"Wartosc niepoprawna. Prosze wprowadzic liczbe nieparzysta"<<endl;
+   cin >> box_width;
+   }
+
+   cout<< "Podaj ilośc wierszy w kafelku"<<endl;
+   cin >> box_length;
+   while(box_length%2==0){
+   cout<<"Wartosc niepoprawna. Prosze wprowadzic liczbe nieparzysta"<<endl;
+   cin >> box_length;
+   }
+
+   cout<< "Podaj ilość kolumn w dywanie"<<endl;
+   cin >> carpet_width;
+
+   cout<< "Podaj ilośc wierszy w dywanie"<<endl;
+   cin >> carpet_length;
+}
+
+void print_line(int box_width, int box_length, int temp)
+{
+    if((box_width/2)>temp)                   //Odwrocenie kolejnosci sprawdzania znaku do diamentu
+    {
+        for(int pos=0;pos<box_width;pos++)   //Deklaracja dlugosci wiersza
+        {
+            if(pos >= (box_width/2)-temp && box_width-pos > (box_width/2)-temp){   //Wybieranie znaku
+            cout<<fence;
+            }
+            else{
+            cout<<star;
+            }
+        }
+    }
+    else
+    {
+        for(int pos=0;pos<box_width;pos++)
+        {
+            if(-pos <= (box_width/2)-temp && box_width-pos >temp-(box_width/2)){
+            cout<<fence;
+            }
+            else{
+            cout<<star;
+            }
+        }
+    }
+
+}
+void print_box(int box_width, int box_length)
+{
+    for(int temp=0;temp<box_length;temp++)
+    {
+    print_line(box_width, box_length, temp);
+    cout<<"\n";
+    }
+}
+
+void print_carpet(int box_width, int box_length,int carpet_width, int carpet_length)
+{
+    for(int a=0;a<carpet_length*box_length;a++)
+    {
+        for(int b=0;b<carpet_width;b++)
+        {
+            print_line(box_width,box_length,a%box_length);
+        }
+         cout<<"\n";
+    }
+
+}
+
+int main()
+{
+
+   get_imputs();
+   print_box(box_width,box_length);
+   cout<<"\n";
+   print_carpet(box_width, box_length, carpet_width, carpet_length);
+
+
+
+
+    return 0;
+}
+
